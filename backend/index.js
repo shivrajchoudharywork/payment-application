@@ -1,6 +1,6 @@
 import express, { urlencoded } from "express";
 const app = express();
-import { rootRouter } from "./routes/index.js";
+import rootRouter from "./routes/index.js";
 
 import cors from "cors";
 import jwt from "jsonwebtoken";

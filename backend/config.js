@@ -1,3 +1,1 @@
-const JWT_SECRET = cewfwvhnvnajvnfjvnjdfvnadfjvndjvhjfvhjfdvfjvhjfvjafvhjfnvjfvnf;
-
-module.exports = JWT_SECRET;
+export const JWT_SECRET = "1234";
