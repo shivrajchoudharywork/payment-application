@@ -3,8 +3,9 @@ import zod from "zod";
 const router = Router();
 import jwt from "jsonwebtoken";
 import { User } from "../db.js";
-import {JWT_SECRET} from "../config.js";
+import { JWT_SECRET } from "../config.js";
 import authMiddleware from "../middleware.js";
+import { Account } from "../db.js";
 
 const signupBody = zod.object({
   username: zod.string().email(),
@@ -34,13 +35,13 @@ router.post("/signup", async (req, res) => {
     lastName: req.body.lastName,
     password: req.body.password,
   });
-  await Acccount.create({
-    userId,
-    balance: 1+ Math.random()*10000
-  })
-
 
   const userId = user._id;
+
+  await Account.create({
+    userId,
+    balance: 1 + Math.random() * 10000,
+  });
   const token = jwt.sign(
     {
       userId,
