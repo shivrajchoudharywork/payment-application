@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "./Button"
 
 export const Users = () => {
@@ -8,6 +8,12 @@ export const Users = () => {
         lastName: "Singh",
         _id: 1
     }]);
+    console.log(users)
+    // useEffect(()=>{
+    //     const data = fetch("http://localhost:3000/api/v1/user/bulk")
+    //     console.log(data)
+    //     setUsers(data)
+    // }, [users])
 
     return <>
         <div className="font-bold mt-6 text-lg">

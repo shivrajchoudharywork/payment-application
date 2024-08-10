@@ -9,7 +9,7 @@ router.use("/balance", authMiddleware, async (req, res) => {
   const account = await Account.findOne({
     userId: req.userId,
   });
-  res.status(200).json({
+  await res.status(200).json({
     balance: account.balance,
   });
 });

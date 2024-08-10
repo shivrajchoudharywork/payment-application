@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Schema, number } from "zod";
 
 mongoose.connect(
   "mongodb+srv://shivraj:8QtkeV7ki6onmoTc@cluster0.gngbljm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"

@@ -7,6 +7,7 @@ export function Button({ label, onClick }) {
         width: "70%",
         padding: "10px",
         backgroundColor: "#28a745",
+        margin: "20px 0px",
         color: "white",
         border: "none",
         borderRadius: "5px",

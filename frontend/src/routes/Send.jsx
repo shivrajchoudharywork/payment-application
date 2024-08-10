@@ -1,3 +1,7 @@
+import { SendMoney } from "../components/SendMoney"
+
 export const Send = ()=>{
-  return <p>Hi Send Money</p>
+  return <>
+  <SendMoney />
+  </>
 }
