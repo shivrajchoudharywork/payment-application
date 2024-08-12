@@ -3,7 +3,12 @@ import {SubHeading} from "../components/SubHeading.jsx"
 import {InputBox} from "../components/InputBox.jsx"
 import {Button} from "../components/Button.jsx"
 import {BottomWarning} from "../components/BottomWarning.jsx"
+import { useState } from "react"
+import { Navigate } from "react-router-dom"
 export const SignIn = ()=>{
+
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
   return (
     <>
       <form
@@ -20,9 +25,24 @@ export const SignIn = ()=>{
       >
         <Heading label={"Sign In"}/>
         <SubHeading label={"Enter your credentials to access your account"}/>
-        <InputBox label={"Email"} placeholder={"example@gmail.com"}/>
-        <InputBox label={"Password"} placeholder={"Enter your password"}/>
-        <Button label={"Sign In"}/>
+        <InputBox label={"Email"} placeholder={"example@gmail.com"} onchange={(e)=>{
+          setUsername(e.target.value)
+        }}/>
+        <InputBox label={"Password"} placeholder={"Enter your password"} onchange={(e)=>{
+          setPassword(e.target.value)} }/>
+        <Button label={"Sign In"} onClick={async ()=>{
+          const response = await fetch("http://localhost:3000/api/v1/user/signin",{
+            method: "POST",
+            body:{
+              username: username,
+              password: password
+            }
+          })
+          const data = await response.json()
+          console.log(data)
+          localStorage.setItem("authorization", data.token)
+          Navigate("/dashboard")
+        }}/>
         <BottomWarning label={"Don't have an account?"} buttonText={"Sign up"} to={"/signin"}/>
       </form>
     </>

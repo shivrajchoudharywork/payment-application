@@ -1,26 +1,32 @@
 import { useState, useEffect } from "react"
 import { Button } from "./Button"
+import { useNavigate } from "react-router-dom";
 
 export const Users = () => {
     // Replace with backend call
     const [users, setUsers] = useState([{
-        firstName: "Harkirat",
-        lastName: "Singh",
-        _id: 1
+        firstName: "Shivraj",
+        lastName: "Choudhary"
     }]);
-    console.log(users)
-    // useEffect(()=>{
-    //     const data = fetch("http://localhost:3000/api/v1/user/bulk")
-    //     console.log(data)
-    //     setUsers(data)
-    // }, [users])
+    const [name, setName]= useState("Shiv")
+   useEffect(()=>{
+        return async function(){
+            const data = await fetch(`http://localhost:3000/api/v1/user/bulk?filter=${name}`)
+            const response = await data.json()
+            
+           setUsers(response.user)
+
+        }
+    }, [name])
 
     return <>
         <div className="font-bold mt-6 text-lg">
             Users
         </div>
         <div className="my-2">
-            <input type="text" placeholder="Search users..." className="w-full px-2 py-1 border rounded border-slate-200"></input>
+            <input type="text" placeholder="Search users..." className="w-full px-2 py-1 border rounded border-slate-200" onChange={(e)=>{
+                setName(e.target.value)
+            }}></input>
         </div>
         <div>
             {users.map(user => <User user={user} />)}
@@ -29,6 +35,7 @@ export const Users = () => {
 }
 
 function User({user}) {
+    const Navigate = useNavigate()
     return <div className="flex justify-between">
         <div className="flex">
             <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
@@ -44,7 +51,9 @@ function User({user}) {
         </div>
 
         <div className="flex flex-col justify-center h-ful">
-            <Button label={"Send Money"} />
+            <Button label={"Send Money"} onClick={(e)=>{
+                Navigate("/send?id=" + user.userId + "&name=" + user.firstName);
+            }}/>
         </div>
     </div>
 }
